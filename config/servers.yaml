@@ -11,12 +11,3 @@ vagrant:
   k8s-node3:
     vm:
       ip: 10.4.2.13
-  k8s-node4:
-    vm:
-      ip: 10.4.2.14
-  k8s-node5:
-    vm:
-      ip: 10.4.2.15
-    provider:
-      cpus: 4
-      memory: 512

@@ -3,17 +3,13 @@ This will spin up a multi-node kubernetes cluster on Ubuntu 18.04.
 It uses https://github.com/cloudnativelabs/kube-router for the pod network.
 
 ## Requirements:
-- vagrant + vagrant-sshfs
-- libvirt or virtualbox
+sudo dnf install vagrant vagrant-sshfs linvirt
 
 ## Usage:
 ```
-vagrant plugin install vagrant-sshfs
 vagrant up
 ```
-A vagrant up with spin up a new cluster. Default behavior is 1 master and 4 nodes.
-
-Multiple master setup has not been tested.
+A vagrant up will spin up a new 3 node + 1 master cluster.
 
 Add/remove nodes by adding entries to config/servers.yaml. You MUST have node in the hostname and use 10.4.2.x for it to work without modifications.
 
@@ -26,7 +22,6 @@ k8s-node1:
     cpus: 4
     memory: 2048
 ```
-(Future update will add extra disk support)
 
 ### Once your cluster is running you can login to k8s-master and run kubectl as root:
 ```
