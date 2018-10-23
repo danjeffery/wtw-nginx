@@ -16,7 +16,8 @@ apt update
 # Ensure docker is installed
 apt install -y docker.io jq
 # Install k8s packages. kubelet will fail to start on the nodes until the master is configured.
-apt install -y kubelet kubeadm kubectl kubernetes-cni || true
+apt install -y kubelet kubeadm kubectl kubernetes-cni ipvsadm || true
+modprobe ip_vs ip_vs_rr ip_vs_wrr ip_vs_sh
 echo "KUBELET_EXTRA_ARGS=--node-ip=${SERVER_IP}" > /etc/default/kubelet
 systemctl enable docker
 systemctl start docker

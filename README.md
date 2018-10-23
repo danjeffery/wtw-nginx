@@ -2,14 +2,15 @@
 This will spin up a multi-node kubernetes cluster on Ubuntu 18.04.
 It uses https://github.com/cloudnativelabs/kube-router for the pod network.
 
-## Requirements:
-sudo dnf install vagrant vagrant-sshfs linvirt
+## Requirements on Fedora:
+sudo dnf install vagrant vagrant-sshfs libvirt
+sudo gpasswd -a [username] libvirt
 
 ## Usage:
 ```
 vagrant up
 ```
-A vagrant up will spin up a new 3 node + 1 master cluster.
+A 'vagrant up' will spin up a new 3 node + 1 master cluster.
 
 Add/remove nodes by adding entries to config/servers.yaml. You MUST have node in the hostname and use 10.4.2.x for it to work without modifications.
 
