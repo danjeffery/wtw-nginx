@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby
+
+require 'yaml'
+
+servers = YAML.load_file(File.join(File.dirname(__FILE__), 'config/servers.yaml'))
+
+Vagrant.configure('2') do |config|
+  config.vm.box = 'generic/ubuntu1804'
+
+  servers['vagrant'].each do |name, server_config|
+    config.vm.define name do |host|
+      config.vm.synced_folder '.', '/vagrant', type: 'sshfs'
+      host.vm.hostname = name
+      host.vm.network :private_network, ip: server_config['vm']['ip']
+    end
+
+    if server_config.has_key?('provider') then
+      server_config['provider'].each do |provider_config_key, provider_config_value|
+        config.vm.provider :libvirt do |host|
+          host.send("#{provider_config_key.to_sym}=", "#{provider_config_value}")
+        end
+      end
+    end
+  end
+
+  config.vm.provision :shell, path: 'config/bootstrap-kube.sh', :privileged => true
+end
