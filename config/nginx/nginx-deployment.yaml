@@ -8,32 +8,32 @@ data:
   default.conf: |
     server {
       listen 3200 default_server;
-      listen [::]:3200 default_server ipv6only=on;
+      #listen [::]:3200 default_server ipv6only=on;
 
       location / {
-        return 404 'EXCEPTION_404_NOT_FOUND - The server name you requested is invalid'
+        return 404 'EXCEPTION_404_NOT_FOUND - The server name you requested is invalid';
       }
     }
 
     server {
       listen 3200;
-      listen [::]:3200 ipv6only=on;
+      #listen [::]:3200 ipv6only=on;
 
       server_name www.example.com;
 
       location / {
-        proxy_pass http://localhost:3400
+        proxy_pass http://localhost:3400;
       }
     }
 
     server {
       listen 3400;
-      listen [::]:3400 ipv6only=on;
+      #listen [::]:3400 ipv6only=on;
 
       server_name localhost;
 
       location / {
-        return 200 'You found me!'
+        return 200 'You found me!';
       }
 
     }
