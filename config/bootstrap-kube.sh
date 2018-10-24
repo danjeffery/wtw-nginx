@@ -46,7 +46,7 @@ fi
 if hostnameMatches node; then
   while [ ! -f /vagrant/config/kube-join.sh ]; do
     echo "Kubernetes master is not yet ready"
-    sleep 1
+    sleep 3
   done
   echo "Kubernetes master is ready. Proceeding to join the cluster."
   sh /vagrant/config/kube-join.sh
