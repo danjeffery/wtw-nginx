@@ -41,6 +41,7 @@ if hostnameMatches master1; then
   KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml
   # If you add nodes later you will need to get a new kubeadm token. Just run the following command on k8s-master1 before the vagrant up of a new node.
   kubeadm token create --print-join-command > /vagrant/config/kube-join.sh
+  kubectl create -f config/nginx/nginx-deployment.yaml
 fi
 
 if hostnameMatches node; then
